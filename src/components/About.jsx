@@ -5,13 +5,13 @@ export default function About() {
         <div className="relative md:min-h-[720px] lg:min-h-[760px]">
           {/* Right image */}
           <div
-            className="relative h-[320px] sm:h-[380px] md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:h-auto animate-this zoom animate-mask animate-blur-in"
+            className="relative h-[320px] sm:h-[380px] md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:h-auto animate-this zoom animate-mask"
             data-reveal-delay="120"
           >
             <img
               src="/images/about-person.webp"
               alt="Healthcare Professional"
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+              className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
               loading="eager"
               decoding="async"
             />
@@ -20,8 +20,7 @@ export default function About() {
           {/* Soft wash behind text (keep image crisp on the right) */}
           <div className="hidden md:block absolute inset-y-0 left-0 w-full md:w-[56%] bg-gradient-to-r from-[#f3fbf7] via-[#f3fbf7]/95 to-transparent pointer-events-none" />
 
-          {/* center divider */}
-          <div className="hidden md:block absolute inset-y-0 left-1/2 w-px bg-[#1b6b56]/10 pointer-events-none" />
+          {/* center divider removed (per design) */}
 
           <div className="relative z-10 h-full">
             <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16 h-full flex items-start pt-16 sm:pt-20 pb-16 md:pt-28 lg:pt-32 md:pb-0">
