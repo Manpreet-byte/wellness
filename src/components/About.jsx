@@ -4,11 +4,16 @@ export default function About() {
       <div className="w-full overflow-hidden border-t border-[#1b6b56]/10 mt-6 md:mt-10">
         <div className="relative md:min-h-[720px] lg:min-h-[760px]">
           {/* Right image */}
-          <div className="relative h-[320px] sm:h-[380px] md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:h-auto animate-this zoom" data-reveal-delay="120">
+          <div
+            className="relative h-[320px] sm:h-[380px] md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:h-auto animate-this zoom animate-mask animate-blur-in"
+            data-reveal-delay="120"
+          >
             <img
-              src="https://shareittofriends.com/demo/wellness-forever/images/person.webp"
+              src="/images/about-person.webp"
               alt="Healthcare Professional"
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+              loading="eager"
+              decoding="async"
             />
           </div>
 

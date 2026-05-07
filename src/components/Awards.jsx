@@ -101,7 +101,7 @@ export default function Awards() {
           >
             {awards.map((award, idx) => (
               <div key={award.id} className="snap-start flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px]">
-                <div className="relative group animate-this up" data-reveal-delay={idx * 90}>
+                <div className="relative group animate-this up animate-pop" data-reveal-delay={idx * 90}>
                   <div className="bg-white rounded-2xl shadow-sm border border-black/5 px-8 py-10 min-h-[170px] flex flex-col justify-center hover-lift">
                     <h3 className="text-lg font-semibold text-[#111]">{award.title}</h3>
                     <p className="mt-3 text-sm text-[#6b7a75] leading-relaxed">{award.subtitle}</p>

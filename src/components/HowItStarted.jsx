@@ -8,7 +8,7 @@ export default function HowItStarted() {
             <h2 className="animate-this up text-5xl md:text-6xl lg:text-7xl font-light text-[#111] mb-10 leading-none tracking-tight">
               How It All Started?
             </h2>
-            <div className="animate-this zoom" data-reveal-delay="120">
+            <div className="animate-this zoom animate-mask animate-blur-in" data-reveal-delay="120">
               <img
                 src="/images/how-it-started.png"
                 alt="Our Journey"

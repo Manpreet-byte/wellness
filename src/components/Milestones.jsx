@@ -104,7 +104,7 @@ export default function Milestones() {
                         <img
                           src={milestone.image}
                           alt={milestone.title}
-                          className="w-full max-w-none sm:max-w-[280px] h-[170px] sm:h-[150px] object-cover rounded-lg shadow-sm transition-transform duration-700 hover:scale-[1.02]"
+                          className="w-full max-w-none sm:max-w-[280px] h-[170px] sm:h-[150px] object-cover rounded-lg shadow-sm transition-transform duration-700 hover:scale-[1.02] animate-mask animate-blur-in"
                         />
                       </div>
                       <p className="mt-5 text-sm leading-relaxed text-[#5e6b66] max-w-[340px]">
