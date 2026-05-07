@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans text-gray-900 bg-white;
+  }
+}
+
+@layer components {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition-colors duration-300;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-white text-primary border-2 border-primary rounded-lg font-semibold hover:bg-accent transition-colors duration-300;
+  }
+  
+  .section-title {
+    @apply text-4xl font-bold text-dark mb-2;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-gray-600 mb-12;
+  }
+
+  .hero-heading {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight;
+    line-height: 1.05;
+  }
+
+  .hero-image {
+    background-image: url('https://shareittofriends.com/demo/wellness-forever/images/banner.jpg');
+    background-size: cover;
+    background-position: right center;
+    height: 100%;
+    filter: saturate(108%) contrast(1.04);
+  }
+
+  /* stats bar divider tweak */
+  .stats-divider > * + * {
+    border-left: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .stats-bg {
+    background-color: #19684f; /* darker green similar to demo */
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .about-img-box {
+    margin-top: -5rem;
+  }
+
+  .section-animated-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    filter: blur(80px);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .section-animated-bg svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .blob-light-1 { animation: rotate1 6s infinite linear; fill: rgba(255, 255, 255, 0.95); transform-origin: 100px 200px; }
+  .blob-light-2 { animation: rotate2 8s infinite linear; fill: rgba(255, 255, 255, 0.9); transform-origin: 900px 300px; }
+  .blob-light-3 { animation: rotate1 10s infinite linear reverse; fill: rgba(255, 255, 255, 0.95); transform-origin: 500px 500px; }
+}
+
+/* Animation utilities */
+@keyframes rotate1 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate2 {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes expandLineWidth {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 112px; /* w-28 = 7rem = 112px */
+    opacity: 1;
+  }
+}
+
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0.5;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.7s ease-out forwards;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.7s ease-out forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.6s ease-out forwards;
+}
+
+.animate-expand-line {
+  animation: expandLineWidth 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.animate-count-up {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+/* Scroll reveal utilities (match demo behavior) */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-this {
+    opacity: 0;
+    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-this.up { transform: translateY(50px); }
+  .animate-this.left { transform: translateX(-200px); }
+  .animate-this.right { transform: translateX(200px); }
+
+  .animate-this.animated {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+  }
+}
+
+/* Staggered delay utilities */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+.delay-900 { animation-delay: 900ms; }
+.delay-1000 { animation-delay: 1000ms; }
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
