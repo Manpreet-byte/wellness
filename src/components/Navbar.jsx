@@ -4,29 +4,45 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-[70px]">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[#1b6b56]/10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
+        <div className="flex justify-between items-center h-[72px]">
           {/* Logo */}
           <div className="flex items-center space-x-4">
             <a href="#home" className="block">
-              <img src="https://shareittofriends.com/demo/wellness-forever/images/logo.svg" alt="Wellness Forever" className="h-10" />
+              <img
+                src="https://shareittofriends.com/demo/wellness-forever/images/logo.svg"
+                alt="Wellness Forever"
+                className="h-10 w-auto"
+              />
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <a href="#about" className="text-gray-700 hover:text-primary transition-colors text-sm">About</a>
-            <a href="#founders" className="text-gray-700 hover:text-primary transition-colors text-sm">Our People</a>
-            <a href="#milestones" className="text-gray-700 hover:text-primary transition-colors text-sm">Our Network</a>
-            <a href="#mission" className="text-gray-700 hover:text-primary transition-colors text-sm">Franchise</a>
-            <a href="#awards" className="text-gray-700 hover:text-primary transition-colors text-sm">Investor</a>
-            <a href="#footer" className="text-gray-700 hover:text-primary transition-colors text-sm">Contact</a>
-            <a href="#footer" className="text-gray-700 hover:text-primary transition-colors text-sm">Work With Us</a>
+          <div className="hidden lg:flex items-center gap-7">
+            {[
+              { href: '#about', label: 'About' },
+              { href: '#founders', label: 'Our People' },
+              { href: '#milestones', label: 'Our Network' },
+              { href: '#mission', label: 'Franchise' },
+              { href: '#awards', label: 'Investor' },
+              { href: '#footer', label: 'Contact' },
+              { href: '#footer', label: 'Work With Us' },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="relative text-sm font-medium text-[#111] hover:text-[#1b6b56] transition-colors"
+              >
+                <span className="relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#1b6b56] after:transition-all hover:after:w-full">
+                  {item.label}
+                </span>
+              </a>
+            ))}
           </div>
 
           {/* Right Side - CTA */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center">
             <a
               href="#products"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-[#1b6b56]/40 text-[#1b6b56] font-semibold hover:bg-[#1b6b56] hover:text-white transition-colors"
@@ -42,28 +58,49 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-md text-gray-700 hover:bg-accent"
+            className="lg:hidden p-2 rounded-md text-[#111] hover:bg-black/5 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            >
+            {isOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4 space-y-2">
-            <a href="#about" className="block px-4 py-2 text-gray-700 hover:bg-accent rounded-md transition-colors">About</a>
-            <a href="#founders" className="block px-4 py-2 text-gray-700 hover:bg-accent rounded-md transition-colors">Our People</a>
-            <a href="#milestones" className="block px-4 py-2 text-gray-700 hover:bg-accent rounded-md transition-colors">Our Network</a>
-            <a href="#mission" className="block px-4 py-2 text-gray-700 hover:bg-accent rounded-md transition-colors">Franchise</a>
-            <a href="#awards" className="block px-4 py-2 text-gray-700 hover:bg-accent rounded-md transition-colors">Investor</a>
-            <a href="#footer" className="block px-4 py-2 text-gray-700 hover:bg-accent rounded-md transition-colors">Contact</a>
-            <a href="#footer" className="block px-4 py-2 text-gray-700 hover:bg-accent rounded-md transition-colors">Work With Us</a>
+          <div className="lg:hidden pb-6">
+            <div className="pt-2 space-y-1">
+              {[
+                { href: '#about', label: 'About' },
+                { href: '#founders', label: 'Our People' },
+                { href: '#milestones', label: 'Our Network' },
+                { href: '#mission', label: 'Franchise' },
+                { href: '#awards', label: 'Investor' },
+                { href: '#footer', label: 'Contact' },
+                { href: '#footer', label: 'Work With Us' },
+              ].map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block px-3 py-2 rounded-lg text-[#111] hover:bg-black/5 transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
             <a
               href="#products"
-              className="w-full inline-flex items-center justify-center gap-2 mt-4 px-6 py-3 rounded-full border border-[#1b6b56]/40 text-[#1b6b56] font-semibold hover:bg-[#1b6b56] hover:text-white transition-colors"
+              onClick={() => setIsOpen(false)}
+              className="w-full inline-flex items-center justify-center gap-2 mt-5 px-6 py-3 rounded-full border border-[#1b6b56]/40 text-[#1b6b56] font-semibold hover:bg-[#1b6b56] hover:text-white transition-colors"
             >
               Shop Now
               <img

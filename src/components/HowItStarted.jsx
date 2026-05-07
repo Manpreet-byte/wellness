@@ -16,7 +16,7 @@ export default function HowItStarted() {
           </div>
 
           {/* Right: Text */}
-          <div className="animate-this up md:pt-6">
+          <div className="animate-this up">
             <h5 className="text-base md:text-lg font-bold text-[#111] mb-7 max-w-[520px]">
               The foundation of Wellness Forever was built on the shared vision of three passionate professionals with deep roots in the healthcare space.
             </h5>
