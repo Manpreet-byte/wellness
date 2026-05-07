@@ -45,6 +45,7 @@ function StatNumber({ value, delayMs = 0 }) {
     if (!el || prefersReducedMotion) return;
 
     let raf = 0;
+    let resetTimeout = 0;
     const start = () => {
       if (startedRef.current) return;
       startedRef.current = true;
@@ -72,9 +73,20 @@ function StatNumber({ value, delayMs = 0 }) {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          start();
-          observer.disconnect();
+          if (entry.isIntersecting) {
+            if (resetTimeout) {
+              clearTimeout(resetTimeout);
+              resetTimeout = 0;
+            }
+            start();
+          } else if (startedRef.current) {
+            // Match demo behavior: reset after leaving viewport.
+            if (resetTimeout) clearTimeout(resetTimeout);
+            resetTimeout = window.setTimeout(() => {
+              startedRef.current = false;
+              setDisplay(0);
+            }, 2000);
+          }
         }
       },
       { threshold: 0.4, rootMargin: '0px 0px -10% 0px' },
@@ -83,6 +95,7 @@ function StatNumber({ value, delayMs = 0 }) {
 
     return () => {
       cancelAnimationFrame(raf);
+      if (resetTimeout) clearTimeout(resetTimeout);
       observer.disconnect();
     };
   }, [delayMs, prefersReducedMotion, target]);

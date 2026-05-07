@@ -4,23 +4,33 @@ import { milestones } from '../data/company';
 export default function Milestones() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollerRef = useRef(null);
+  const inViewRef = useRef(false);
 
-  const scrollByItems = (direction) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const first = el.querySelector('[data-ms-item]');
-    const itemWidth = first?.getBoundingClientRect?.().width ?? 340;
-    const gap = 0;
-    el.scrollBy({ left: direction * (itemWidth + gap), behavior: 'smooth' });
-  };
+  const goNext = () => setActiveIndex((i) => Math.min(milestones.length - 1, i + 1));
+  const goPrev = () => setActiveIndex((i) => Math.max(0, i - 1));
 
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
+    if (!inViewRef.current) return;
     const item = el.querySelector(`[data-ms-item-index="${activeIndex}"]`);
     if (!item) return;
-    item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    const left = item.offsetLeft - (el.clientWidth - item.clientWidth) / 2;
+    el.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
   }, [activeIndex]);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) inViewRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <section id="milestones" className="py-20 md:py-28 bg-[#d9efe3] overflow-hidden relative">
@@ -44,7 +54,7 @@ export default function Milestones() {
           <div className="flex items-center gap-5 animate-this up" data-reveal-delay="220">
             <button
               type="button"
-              onClick={() => scrollByItems(-1)}
+              onClick={goPrev}
               aria-label="Previous milestone"
               className="text-[#1b6b56] hover:opacity-80 transition-opacity"
             >
@@ -52,7 +62,7 @@ export default function Milestones() {
             </button>
             <button
               type="button"
-              onClick={() => scrollByItems(1)}
+              onClick={goNext}
               aria-label="Next milestone"
               className="text-[#1b6b56] hover:opacity-80 transition-opacity"
             >

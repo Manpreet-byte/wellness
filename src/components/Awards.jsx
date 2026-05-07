@@ -5,8 +5,19 @@ export default function Awards() {
   const scrollerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [openAwardId, setOpenAwardId] = useState(null);
+  const autoplayRef = useRef(null);
+  const inViewRef = useRef(false);
 
   const markers = awards.map((award) => award.id);
+
+  const scrollToIndex = (index, behavior = 'smooth') => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const child = el.children?.[index];
+    if (!child) return;
+    // Only scroll inside the horizontal scroller (avoid page scroll).
+    el.scrollTo({ left: child.offsetLeft, behavior });
+  };
 
   useEffect(() => {
     const el = scrollerRef.current;
@@ -34,6 +45,51 @@ export default function Awards() {
   }, []);
 
   useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (prefersReducedMotion) return;
+
+    const start = () => {
+      stop();
+      if (!inViewRef.current) return;
+      autoplayRef.current = window.setInterval(() => {
+        const next = (activeIndex + 1) % awards.length;
+        scrollToIndex(next);
+      }, 2000);
+    };
+
+    const stop = () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+        autoplayRef.current = null;
+      }
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          inViewRef.current = entry.isIntersecting;
+          if (entry.isIntersecting) start();
+          else stop();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+
+    el.addEventListener('mouseenter', stop);
+    el.addEventListener('mouseleave', start);
+
+    return () => {
+      stop();
+      io.disconnect();
+      el.removeEventListener('mouseenter', stop);
+      el.removeEventListener('mouseleave', start);
+    };
+  }, [activeIndex]);
+
+  useEffect(() => {
     const onDocClick = (e) => {
       const card = e.target?.closest?.('[data-award-card]');
       if (!card) setOpenAwardId(null);
@@ -43,13 +99,8 @@ export default function Awards() {
   }, []);
 
   const scrollByCards = (direction) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const firstChild = el.firstElementChild;
-    if (!firstChild) return;
-    const cardWidth = firstChild.getBoundingClientRect().width;
-    const gap = 28; // matches `gap-7`
-    el.scrollBy({ left: direction * (cardWidth + gap), behavior: 'smooth' });
+    const next = direction > 0 ? (activeIndex + 1) % awards.length : (activeIndex - 1 + awards.length) % awards.length;
+    scrollToIndex(next);
   };
 
   return (

@@ -6,10 +6,11 @@ export default function Testimonials() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const trackRef = useRef(null);
+  const inViewRef = useRef(false);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-    if (prefersReducedMotion || paused) return;
+    if (prefersReducedMotion || paused || !inViewRef.current) return;
     const t = setInterval(() => setActive((a) => (a + 1) % testimonials.length), 5000);
     return () => clearInterval(t);
   }, [paused]);
@@ -19,8 +20,23 @@ export default function Testimonials() {
     if (!el) return;
     const card = el.querySelector(`[data-ts="${active}"]`);
     if (!card) return;
-    card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    // Only scroll inside carousel.
+    const left = card.offsetLeft - (el.clientWidth - card.clientWidth) / 2;
+    el.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
   }, [active]);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) inViewRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <section id="testimonials" className="py-20 bg-gradient-to-b from-white to-accent">

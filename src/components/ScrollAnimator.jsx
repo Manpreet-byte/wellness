@@ -15,19 +15,38 @@ export default function ScrollAnimator() {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const delay = entry.target.getAttribute('data-reveal-delay');
-          if (delay) {
-            entry.target.style.transitionDelay = `${Number(delay) || 0}ms`;
+          const el = entry.target;
+          if (entry.isIntersecting) {
+            const delay = el.getAttribute('data-reveal-delay');
+            if (delay) el.style.transitionDelay = `${Number(delay) || 0}ms`;
+            el.classList.add('animated');
+          } else {
+            // Allow replay when the section comes back into view.
+            el.classList.remove('animated');
+            el.style.transitionDelay = '';
           }
-          entry.target.classList.add('animated');
-          observer.unobserve(entry.target);
         }
       },
       { threshold: 0.15, rootMargin: '0px 0px -10% 0px' },
     );
 
     for (const el of elements) observer.observe(el);
+
+    // Ensure above-the-fold elements animate on initial load without requiring scroll.
+    const revealIfInView = () => {
+      const vh = window.innerHeight || 800;
+      for (const el of getElements()) {
+        const rect = el.getBoundingClientRect();
+        const inView = rect.top < vh * 0.92 && rect.bottom > 0;
+        if (!inView) continue;
+        const delay = el.getAttribute('data-reveal-delay');
+        if (delay) el.style.transitionDelay = `${Number(delay) || 0}ms`;
+        el.classList.add('animated');
+      }
+    };
+
+    // Two frames: allow initial styles to apply, then trigger transition.
+    requestAnimationFrame(() => requestAnimationFrame(revealIfInView));
 
     const mutationObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
