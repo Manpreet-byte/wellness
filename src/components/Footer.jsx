@@ -2,8 +2,8 @@ export default function Footer() {
   return (
     <footer id="footer" className="bg-[#0d2a23] text-white pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
-        <div className="grid md:grid-cols-4 gap-12 mb-10 animate-this up">
-          <div>
+        <div className="grid md:grid-cols-4 gap-12 mb-10">
+          <div className="animate-this up" data-reveal-delay="0">
             <img
               src="https://shareittofriends.com/demo/wellness-forever/images/footer-logo.svg"
               alt="Wellness Forever"
@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div>
+          <div className="animate-this up" data-reveal-delay="120">
             <h5 className="font-semibold mb-4">Quick Links</h5>
             <div className="space-y-2 text-white/60 text-sm">
               {['Home', 'About', 'Our Presence', 'Franchise', 'Investors'].map((t) => (
@@ -26,7 +26,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="animate-this up" data-reveal-delay="240">
             <h5 className="font-semibold mb-4">Contacts</h5>
             <div className="space-y-2 text-white/60 text-sm">
               <a href="mailto:info@wellnessforever.in" className="block hover:text-white transition-colors">
@@ -39,7 +39,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="md:text-right">
+          <div className="md:text-right animate-this up" data-reveal-delay="360">
             <h5 className="font-semibold mb-4">Follow</h5>
             <div className="flex md:justify-end gap-4 text-white/70">
               {[0, 1, 2].map((idx) => (
@@ -68,4 +68,3 @@ export default function Footer() {
     </footer>
   );
 }
-

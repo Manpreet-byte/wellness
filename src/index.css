@@ -206,6 +206,37 @@
   }
 }
 
+.hero-load {
+  animation: heroFadeIn 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-media {
+  animation: heroMediaIn 1200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes heroMediaIn {
+  from { opacity: 0; transform: scale(1.04); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hover-lift {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.12);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 14px 40px rgba(16, 185, 129, 0.35);
+}
+
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
 }
@@ -254,12 +285,21 @@
   }
 
   .animate-this.up { transform: translateY(50px); }
+  .animate-this.down { transform: translateY(-40px); }
   .animate-this.left { transform: translateX(-200px); }
   .animate-this.right { transform: translateX(200px); }
+  .animate-this.zoom { transform: scale(0.96); }
 
   .animate-this.animated {
     opacity: 1 !important;
-    transform: translate(0, 0) !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-load,
+  .hero-media {
+    animation: none !important;
   }
 }
 

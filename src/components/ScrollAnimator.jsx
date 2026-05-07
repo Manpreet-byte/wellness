@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 
 export default function ScrollAnimator() {
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll('.animate-this'));
+    const getElements = (root = document) => Array.from(root.querySelectorAll?.('.animate-this') ?? []);
+    const elements = getElements();
     if (elements.length === 0) return;
 
     const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
@@ -15,6 +16,10 @@ export default function ScrollAnimator() {
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
+          const delay = entry.target.getAttribute('data-reveal-delay');
+          if (delay) {
+            entry.target.style.transitionDelay = `${Number(delay) || 0}ms`;
+          }
           entry.target.classList.add('animated');
           observer.unobserve(entry.target);
         }
@@ -23,9 +28,24 @@ export default function ScrollAnimator() {
     );
 
     for (const el of elements) observer.observe(el);
-    return () => observer.disconnect();
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (!(node instanceof Element)) continue;
+          if (node.classList?.contains('animate-this')) observer.observe(node);
+          for (const el of getElements(node)) observer.observe(el);
+        }
+      }
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      mutationObserver.disconnect();
+      observer.disconnect();
+    };
   }, []);
 
   return null;
 }
-

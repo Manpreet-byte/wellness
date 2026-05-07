@@ -1,13 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Newsletter() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    setInView(true);
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,18 +25,19 @@ export default function Newsletter() {
       <div className="max-w-4xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16 text-center relative z-10">
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 overflow-hidden leading-tight">
-          <span className="inline-block animate-slide-in-up">Stay Updated</span>
+          <span className="inline-block animate-this up">Stay Updated</span>
         </h2>
 
         {/* Subheading */}
-        <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto animate-slide-in-up delay-200">
+        <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto animate-this up" data-reveal-delay="140">
           Subscribe to our newsletter for exclusive offers, wellness tips, and new product launches.
         </p>
 
         {/* Newsletter Form */}
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto animate-slide-in-up delay-400 mb-8"
+          className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto animate-this up mb-8"
+          data-reveal-delay="260"
         >
           <input
             type="email"
@@ -53,7 +49,7 @@ export default function Newsletter() {
           />
           <button
             type="submit"
-            className="px-8 md:px-10 py-4 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
+            className="px-8 md:px-10 py-4 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5 whitespace-nowrap"
           >
             Subscribe
           </button>
@@ -70,7 +66,7 @@ export default function Newsletter() {
         )}
 
         {/* Privacy notice */}
-        <p className="mt-8 text-sm text-white/70 animate-slide-in-up delay-500">
+        <p className="mt-8 text-sm text-white/70 animate-this up" data-reveal-delay="360">
           We respect your privacy. Unsubscribe anytime.
         </p>
       </div>

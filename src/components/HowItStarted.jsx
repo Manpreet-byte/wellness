@@ -4,19 +4,21 @@ export default function HowItStarted() {
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16 py-16 md:py-20">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
           {/* Left: Title + Image */}
-          <div className="animate-this up">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-[#111] mb-10 leading-none tracking-tight">
+          <div>
+            <h2 className="animate-this up text-5xl md:text-6xl lg:text-7xl font-light text-[#111] mb-10 leading-none tracking-tight">
               How It All Started?
             </h2>
-            <img
-              src="/images/how-it-started.png"
-              alt="Our Journey"
-              className="w-full h-[460px] md:h-[560px] object-cover object-top bg-[#f3fbf7]"
-            />
+            <div className="animate-this zoom" data-reveal-delay="120">
+              <img
+                src="/images/how-it-started.png"
+                alt="Our Journey"
+                className="w-full h-[360px] sm:h-[460px] md:h-[560px] object-cover object-top bg-[#f3fbf7] transition-transform duration-700 hover:scale-[1.01]"
+              />
+            </div>
           </div>
 
           {/* Right: Text */}
-          <div className="animate-this up">
+          <div className="animate-this up" data-reveal-delay="160">
             <h5 className="text-base md:text-lg font-bold text-[#111] mb-7 max-w-[520px]">
               The foundation of Wellness Forever was built on the shared vision of three passionate professionals with deep roots in the healthcare space.
             </h5>

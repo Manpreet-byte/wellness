@@ -32,12 +32,14 @@ export default function Milestones() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
         <div className="flex items-start justify-between gap-6 mb-10 md:mb-14">
-          <div className="animate-this up">
-            <p className="text-[#1b6b56] font-semibold tracking-widest text-sm">OUR HISTORY</p>
-            <h2 className="mt-3 text-5xl md:text-6xl lg:text-7xl font-light text-[#1e2b26]">Milestones</h2>
+          <div>
+            <p className="animate-this right text-[#1b6b56] font-semibold tracking-widest text-sm">OUR HISTORY</p>
+            <h2 className="animate-this left mt-3 text-5xl md:text-6xl lg:text-7xl font-light text-[#1e2b26]" data-reveal-delay="120">
+              Milestones
+            </h2>
           </div>
 
-          <div className="flex gap-3 pt-7 md:pt-10 animate-this up">
+          <div className="flex gap-3 pt-7 md:pt-10 animate-this up" data-reveal-delay="220">
             <button
               onClick={goToPrevious}
               className="p-3 rounded-full border border-[#1b6b56]/30 text-[#1b6b56] hover:bg-white/40 transition-colors"
@@ -60,7 +62,7 @@ export default function Milestones() {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16 animate-this up">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16 animate-this up" data-reveal-delay="120">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-l border-[#a6c7bb]">
           {visibleMilestones.map((milestone, localIndex) => {
             const globalIndex = globalIndexFor(localIndex);
@@ -73,10 +75,10 @@ export default function Milestones() {
                 <button
                   type="button"
                   onClick={() => setActiveIndex(globalIndex)}
-                  className="w-full text-left px-8 pt-8 pb-6"
+                  className="w-full text-left px-6 sm:px-8 pt-7 sm:pt-8 pb-6"
                 >
                   <div
-                    className={`text-6xl md:text-7xl font-light leading-none ${
+                    className={`text-5xl sm:text-6xl md:text-7xl font-light leading-none ${
                       isActive ? 'text-[#1b6b56]' : 'text-[#1b6b56]/35'
                     }`}
                   >
@@ -88,21 +90,21 @@ export default function Milestones() {
                 </button>
 
                 <div
-                  className="h-24"
+                  className="h-16 sm:h-24"
                   style={{
                     backgroundImage:
                       'repeating-linear-gradient(90deg, rgba(27, 107, 86, 0.25) 0 2px, transparent 2px 14px)',
                   }}
                 />
 
-                <div className="px-8 pb-14">
+                <div className="px-6 sm:px-8 pb-12 sm:pb-14">
                   {isActive ? (
                     <div className="pt-8">
                       <div className="bg-white/30 rounded-xl p-0.5 inline-block">
                         <img
                           src={milestone.image}
                           alt={milestone.title}
-                          className="w-full max-w-[280px] h-[150px] object-cover rounded-lg shadow-sm"
+                          className="w-full max-w-none sm:max-w-[280px] h-[170px] sm:h-[150px] object-cover rounded-lg shadow-sm transition-transform duration-700 hover:scale-[1.02]"
                         />
                       </div>
                       <p className="mt-5 text-sm leading-relaxed text-[#5e6b66] max-w-[340px]">
@@ -110,7 +112,7 @@ export default function Milestones() {
                       </p>
                     </div>
                   ) : (
-                    <div className="h-[220px]" />
+                    <div className="hidden sm:block h-[220px]" />
                   )}
                 </div>
               </div>

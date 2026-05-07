@@ -47,11 +47,13 @@ export default function Awards() {
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
         <div className="flex items-end justify-between gap-6 mb-10 animate-this up">
           <div>
-            <p className="text-[#1b6b56] font-semibold tracking-widest text-sm">RECOGNITION</p>
-            <h2 className="mt-3 text-5xl md:text-6xl lg:text-7xl font-light text-[#111]">Awards & Accolades</h2>
+            <p className="animate-this right text-[#1b6b56] font-semibold tracking-widest text-sm">RECOGNITION</p>
+            <h2 className="animate-this left mt-3 text-5xl md:text-6xl lg:text-7xl font-light text-[#111]" data-reveal-delay="120">
+              Awards & Accolades
+            </h2>
           </div>
 
-          <div className="hidden sm:flex items-center gap-5">
+          <div className="hidden sm:flex items-center gap-5 animate-this up" data-reveal-delay="220">
             <button
               type="button"
               onClick={() => scrollByCards(-1)}
@@ -77,7 +79,7 @@ export default function Awards() {
 
         <div className="relative animate-this up">
           {/* timeline */}
-          <div className="relative mt-4 mb-10">
+          <div className="relative mt-4 mb-10 animate-this up" data-reveal-delay="140">
             <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#1b6b56]/30" />
             <div className="relative flex items-center justify-between">
               {markers.map((id, idx) => {
@@ -97,10 +99,10 @@ export default function Awards() {
             ref={scrollerRef}
             className="flex gap-7 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-2"
           >
-            {awards.map((award) => (
+            {awards.map((award, idx) => (
               <div key={award.id} className="snap-start flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px]">
-                <div className="relative group">
-                  <div className="bg-white rounded-2xl shadow-sm border border-black/5 px-8 py-10 min-h-[170px] flex flex-col justify-center">
+                <div className="relative group animate-this up" data-reveal-delay={idx * 90}>
+                  <div className="bg-white rounded-2xl shadow-sm border border-black/5 px-8 py-10 min-h-[170px] flex flex-col justify-center hover-lift">
                     <h3 className="text-lg font-semibold text-[#111]">{award.title}</h3>
                     <p className="mt-3 text-sm text-[#6b7a75] leading-relaxed">{award.subtitle}</p>
                   </div>
