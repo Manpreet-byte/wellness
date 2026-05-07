@@ -1,4 +1,16 @@
+import { useState } from 'react';
+
 export default function MissionVision() {
+  const [activeCard, setActiveCard] = useState('vision');
+
+  const onActivate = (key) => setActiveCard(key);
+  const onKeyActivate = (e, key) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onActivate(key);
+    }
+  };
+
   return (
     <section id="mission" className="py-20 md:py-28 bg-[#d9efe3] relative overflow-hidden">
       <div className="section-animated-bg">
@@ -20,28 +32,60 @@ export default function MissionVision() {
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-10">
           <div className="animate-this left">
-            <div className="bg-[#0d2a23] text-white rounded-3xl p-10 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] h-full">
-              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6">
-                <img src="https://shareittofriends.com/demo/wellness-forever/images/vision.svg" alt="Vision" className="w-9 h-9" />
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => onActivate('vision')}
+              onKeyDown={(e) => onKeyActivate(e, 'vision')}
+              className={`rounded-3xl p-10 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] h-full cursor-pointer select-none ${
+                activeCard === 'vision' ? 'bg-[#0d2a23] text-white' : 'bg-white text-[#1e2b26] border border-[#1b6b56]/5'
+              }`}
+            >
+              <div
+                className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${
+                  activeCard === 'vision' ? 'bg-white' : 'bg-[#0d2a23]'
+                }`}
+              >
+                <img
+                  src="/images/vision.svg"
+                  alt="Vision"
+                  className={`w-9 h-9 ${activeCard === 'vision' ? '' : 'brightness-0 invert'}`}
+                />
               </div>
-              <h3 className="text-3xl md:text-4xl font-bold mb-4">Our Vision</h3>
-              <p className="text-white/80 text-lg leading-relaxed">
+              <h3 className={`text-3xl md:text-4xl font-bold mb-4 ${activeCard === 'vision' ? '' : 'text-[#1e2b26]'}`}>
+                Our Vision
+              </h3>
+              <p className={`text-lg leading-relaxed ${activeCard === 'vision' ? 'text-white/80' : 'text-[#5e6b66]'}`}>
                 To be India's most trusted and accessible pharmacy retail chain, setting the benchmark for reliable healthcare delivery and customer experience across every community we serve.
               </p>
             </div>
           </div>
 
           <div className="animate-this right">
-            <div className="bg-white rounded-3xl p-10 md:p-12 border border-[#1b6b56]/5 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] h-full">
-              <div className="w-16 h-16 bg-[#0d2a23] rounded-2xl flex items-center justify-center mb-6">
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => onActivate('mission')}
+              onKeyDown={(e) => onKeyActivate(e, 'mission')}
+              className={`rounded-3xl p-10 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] h-full cursor-pointer select-none ${
+                activeCard === 'mission' ? 'bg-[#0d2a23] text-white' : 'bg-white text-[#1e2b26] border border-[#1b6b56]/5'
+              }`}
+            >
+              <div
+                className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${
+                  activeCard === 'mission' ? 'bg-white' : 'bg-[#0d2a23]'
+                }`}
+              >
                 <img
-                  src="https://shareittofriends.com/demo/wellness-forever/images/mission.svg"
+                  src="/images/mission.svg"
                   alt="Mission"
-                  className="w-9 h-9 brightness-0 invert"
+                  className={`w-9 h-9 ${activeCard === 'mission' ? '' : 'brightness-0 invert'}`}
                 />
               </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-[#1e2b26] mb-4">Our Mission</h3>
-              <p className="text-[#5e6b66] text-lg leading-relaxed">
+              <h3 className={`text-3xl md:text-4xl font-bold mb-4 ${activeCard === 'mission' ? '' : 'text-[#1e2b26]'}`}>
+                Our Mission
+              </h3>
+              <p className={`text-lg leading-relaxed ${activeCard === 'mission' ? 'text-white/80' : 'text-[#5e6b66]'}`}>
                 To make quality healthcare easily accessible through a strong network of stores operating day and night, ensuring the availability of genuine medicines and wellness products whenever they are needed.
               </p>
             </div>
@@ -51,4 +95,3 @@ export default function MissionVision() {
     </section>
   );
 }
-

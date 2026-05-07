@@ -1,6 +1,6 @@
 export default function TestimonialCard({ testimonial }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+    <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1">
       {/* Stars */}
       <div className="flex items-center gap-1 mb-4">
         {[...Array(testimonial.rating)].map((_, i) => (

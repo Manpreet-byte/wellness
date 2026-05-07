@@ -22,7 +22,7 @@ export default function FeaturedProducts() {
 
         {/* CTA Button */}
         <div className="text-center mt-16 animate-this up">
-          <button className="btn-primary btn-glow text-lg px-8 py-4 inline-block hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:scale-[1.02]">
+          <button className="btn-primary wf-btn btn-glow text-lg px-8 py-4 inline-block hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:scale-[1.02]">
             View All Products →
           </button>
         </div>

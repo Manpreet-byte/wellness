@@ -27,14 +27,14 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
-        <div className="flex justify-between items-center h-[72px]">
+        <div className="flex justify-between items-center h-[70px]">
           {/* Logo */}
           <div className="flex items-center space-x-4 animate-this left" data-reveal-delay="0">
             <a href="#home" className="block">
               <img
-                src="https://shareittofriends.com/demo/wellness-forever/images/logo.svg"
+                src="/images/logo.svg"
                 alt="Wellness Forever"
-                className="h-10 w-auto transition-transform duration-300 hover:scale-[1.02]"
+                className="h-[60px] w-auto transition-transform duration-300 hover:scale-[1.02]"
               />
             </a>
           </div>
@@ -66,11 +66,11 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center animate-this right" data-reveal-delay="220">
             <a
               href="#products"
-              className="group inline-flex items-center gap-2 px-7 py-3 rounded-full border border-[#1b6b56]/40 text-[#1b6b56] font-semibold hover:bg-[#1b6b56] hover:text-white transition-colors"
+              className="group inline-flex items-center gap-2 btn-shop"
             >
               Shop Now
               <img
-                src="https://shareittofriends.com/demo/wellness-forever/images/button-arrow.svg"
+                src="/images/button-arrow.svg"
                 alt=""
                 className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5"
               />
@@ -122,7 +122,7 @@ export default function Navbar() {
           >
             <div className="px-6 py-6 border-b border-black/5 flex items-center justify-between">
               <img
-                src="https://shareittofriends.com/demo/wellness-forever/images/logo.svg"
+                src="/images/logo.svg"
                 alt="Wellness Forever"
                 className="h-9 w-auto"
               />
@@ -166,7 +166,7 @@ export default function Navbar() {
               >
                 Shop Now
                 <img
-                  src="https://shareittofriends.com/demo/wellness-forever/images/button-arrow.svg"
+                  src="/images/button-arrow.svg"
                   alt=""
                   className="h-3 w-3"
                 />

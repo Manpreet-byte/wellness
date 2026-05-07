@@ -1,13 +1,15 @@
 import Home from './pages/Home';
 import ScrollAnimator from './components/ScrollAnimator';
-import MotionEnhancer from './components/MotionEnhancer';
+import Preloader from './components/Preloader';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
     <>
+      <Preloader />
       <ScrollAnimator />
-      <MotionEnhancer />
       <Home />
+      <ScrollToTop />
     </>
   );
 }

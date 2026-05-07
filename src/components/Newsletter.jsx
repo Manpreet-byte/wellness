@@ -39,14 +39,17 @@ export default function Newsletter() {
           className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto animate-this up mb-8"
           data-reveal-delay="260"
         >
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 px-6 md:px-8 py-4 rounded-lg bg-white/95 text-dark font-medium focus:outline-none focus:ring-4 focus:ring-white/50 focus:bg-white transition-all duration-300 placeholder:text-gray-400"
-            required
-          />
+          <div className="flex-1 relative">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-6 md:px-8 py-4 rounded-lg bg-white/95 text-dark font-medium focus:outline-none focus:ring-4 focus:ring-white/50 focus:bg-white transition-all duration-300 placeholder:text-gray-400"
+              required
+            />
+            <span aria-hidden className="wf-input-underline" />
+          </div>
           <button
             type="submit"
             className="px-8 md:px-10 py-4 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5 whitespace-nowrap"

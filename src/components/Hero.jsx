@@ -100,27 +100,28 @@ export default function Hero() {
   return (
     <section id="home" className="bg-white">
       {/* Hero canvas (full width) */}
-      <div className="hero-load relative h-[calc(100vh-72px)] min-h-[520px] sm:min-h-[560px] md:min-h-[640px] overflow-hidden">
-        {/* Background image (no video) */}
-        <div className="hero-media absolute inset-0 hero-image" />
+      <div className="relative overflow-hidden text-white flex items-center h-auto py-[100px] md:py-0 md:h-[calc(100vh-70px)]">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/banner.jpg"
+          className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2 object-cover"
+        >
+          <source src="/videos/wellness.mp4" type="video/mp4" />
+        </video>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#062a1e]/95 via-[#062a1e]/65 to-transparent pointer-events-none" />
-        <div className="sm:hidden absolute inset-0 bg-[#062a1e]/25 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#062a1e]/95 via-[#062a1e]/40 to-transparent pointer-events-none" />
 
-        <div className="relative z-10 h-full flex items-end sm:items-center">
-          <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
-            <div className="max-w-[720px] pb-14 sm:pb-0">
-              <h1 className="hero-heading mb-6">
-                <span className="block animate-this up" data-reveal-delay="0">
-                  Building the
-                </span>
-                <span className="block animate-this up" data-reveal-delay="120">
-                  Future of Wellness
-                </span>
+        <div className="relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
+            <div className="max-w-[720px]">
+              <h1 className="hero-title fw-bold animate-this left">
+                Building the <br />
+                Future of Wellness
               </h1>
-              <div className="h-px w-32 bg-white/35 mb-6 animate-this up" data-reveal-delay="120" />
-              <p className="text-sm sm:text-base md:text-lg text-white/80 leading-relaxed max-w-[640px] animate-this up" data-reveal-delay="220">
+              <p className="hero-subtext animate-this right">
                 Redefining healthcare access through compassion, expertise, and modern retail excellence, ensuring trusted, reliable, and seamless care for every community.
               </p>
             </div>
@@ -136,7 +137,7 @@ export default function Hero() {
               {stats.map((stat, idx) => (
                 <div
                   key={stat.label}
-                  className="flex-1 py-8 px-4 sm:px-6 animate-count-up"
+                  className="stat-divider-item flex-1 py-8 px-4 sm:px-6 animate-count-up"
                   style={{ animationDelay: `${400 + idx * 100}ms` }}
                 >
                   <p className="text-3xl md:text-4xl font-extrabold tracking-tight transform transition-transform hover:scale-110 duration-300">

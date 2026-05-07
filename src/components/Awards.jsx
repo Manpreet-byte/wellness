@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 export default function Awards() {
   const scrollerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [openAwardId, setOpenAwardId] = useState(null);
 
   const markers = awards.map((award) => award.id);
 
@@ -30,6 +31,15 @@ export default function Awards() {
       cancelAnimationFrame(raf);
       el.removeEventListener('scroll', onScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    const onDocClick = (e) => {
+      const card = e.target?.closest?.('[data-award-card]');
+      if (!card) setOpenAwardId(null);
+    };
+    document.addEventListener('click', onDocClick, true);
+    return () => document.removeEventListener('click', onDocClick, true);
   }, []);
 
   const scrollByCards = (direction) => {
@@ -101,14 +111,31 @@ export default function Awards() {
           >
             {awards.map((award, idx) => (
               <div key={award.id} className="snap-start flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px]">
-                <div className="relative group animate-this up animate-pop" data-reveal-delay={idx * 90}>
-                  <div className="bg-white rounded-2xl shadow-sm border border-black/5 px-8 py-10 min-h-[170px] flex flex-col justify-center hover-lift">
+                <div
+                  data-award-card
+                  className="relative group animate-this up animate-pop"
+                  data-reveal-delay={idx * 90}
+                  onClick={() => setOpenAwardId((prev) => (prev === award.id ? null : award.id))}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setOpenAwardId((prev) => (prev === award.id ? null : award.id));
+                    }
+                  }}
+                >
+                  <div className="bg-white rounded-2xl shadow-sm border border-black/5 px-8 py-10 min-h-[170px] flex flex-col justify-center hover-lift cursor-pointer">
                     <h3 className="text-lg font-semibold text-[#111]">{award.title}</h3>
                     <p className="mt-3 text-sm text-[#6b7a75] leading-relaxed">{award.subtitle}</p>
                   </div>
 
                   {award.image ? (
-                    <div className="pointer-events-none absolute -top-44 left-1/2 -translate-x-1/2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+                    <div
+                      className={`pointer-events-none absolute -top-44 left-1/2 -translate-x-1/2 transition-all duration-200 ${
+                        openAwardId === award.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                      } group-hover:opacity-100 group-hover:translate-y-0`}
+                    >
                       <div className="bg-white rounded-xl shadow-lg border border-black/10 p-2">
                         <img src={award.image} alt={`${award.title} award`} className="w-[240px] h-[140px] object-cover rounded-lg" />
                       </div>

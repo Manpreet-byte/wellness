@@ -1,6 +1,6 @@
 export default function ProductCard({ product }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 group hover-lift">
       {/* Image Container */}
       <div className="relative h-64 overflow-hidden bg-gray-100">
         <img 

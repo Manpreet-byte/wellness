@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-10">
           <div className="animate-this up" data-reveal-delay="0">
             <img
-              src="https://shareittofriends.com/demo/wellness-forever/images/footer-logo.svg"
+              src="/images/footer-logo.svg"
               alt="Wellness Forever"
               className="h-28 w-auto mb-3"
             />
