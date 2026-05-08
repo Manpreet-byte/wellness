@@ -13,7 +13,7 @@ export default function Awards() {
   const baseIndexRef = useRef(awards.length); // start in the middle copy for seamless loop
 
   const total = awards.length;
-  const canHoverRef = useRef(false);
+  const canHoverRef = useRef(true);
 
   useEffect(() => {
     const mq = window.matchMedia?.('(hover: hover) and (pointer: fine)');
