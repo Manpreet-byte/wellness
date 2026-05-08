@@ -113,7 +113,7 @@ export default function Hero() {
   return (
     <section id="home" className="bg-white">
       {/* Hero canvas (full width) */}
-      <div className="relative overflow-hidden text-white flex items-center h-auto py-[100px] md:py-0 md:h-[calc(100vh-70px)]">
+      <div className="relative overflow-hidden text-white flex items-center h-auto py-[100px] md:py-0 md:h-[calc(100vh-84px)]">
         <video
           autoPlay
           muted
@@ -150,13 +150,13 @@ export default function Hero() {
               {stats.map((stat, idx) => (
                 <div
                   key={stat.label}
-                  className="stat-divider-item flex-1 py-8 px-4 sm:px-6 animate-count-up"
+                  className="stat-divider-item flex-1 py-10 md:py-12 px-4 sm:px-6 animate-count-up"
                   style={{ animationDelay: `${400 + idx * 100}ms` }}
                 >
-                  <p className="text-3xl md:text-4xl font-extrabold tracking-tight transform transition-transform hover:scale-110 duration-300">
+                  <p className="text-4xl md:text-5xl lg:text-[3.5rem] font-semibold tracking-tight">
                     <StatNumber value={stat.value} delayMs={idx * 120} />
                   </p>
-                  <p className="text-sm md:text-base mt-2 text-white/85 animate-fade-in" style={{ animationDelay: `${600 + idx * 100}ms` }}>
+                  <p className="text-base md:text-lg mt-3 text-white/80 animate-fade-in" style={{ animationDelay: `${600 + idx * 100}ms` }}>
                     {stat.label}
                   </p>
                 </div>

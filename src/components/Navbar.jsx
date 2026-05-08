@@ -24,17 +24,18 @@ export default function Navbar() {
     <nav
       className={`sticky top-0 z-50 backdrop-blur transition-all duration-300 ${
         scrolled ? 'bg-white/95 border-b border-[#1b6b56]/10 shadow-sm' : 'bg-white/70 border-b border-transparent'
+
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
-        <div className="flex justify-between items-center h-[70px]">
+        <div className="flex justify-between items-center h-[84px]">
           {/* Logo */}
           <div className="flex items-center space-x-4 animate-this left" data-reveal-delay="0">
             <a href="#home" className="block">
               <img
                 src="/images/logo.svg"
                 alt="Wellness Forever"
-                className="h-[60px] w-auto transition-transform duration-300 hover:scale-[1.02]"
+                className="h-[64px] w-auto transition-transform duration-300 hover:scale-[1.02]"
               />
             </a>
           </div>
@@ -53,7 +54,7 @@ export default function Navbar() {
               <a
                 key={item.label}
                 href={item.href}
-                className="relative text-sm font-medium text-[#111] hover:text-[#1b6b56] transition-colors"
+                className="relative py-2 text-[0.95rem] font-medium text-[#111] hover:text-[#1b6b56] transition-colors"
               >
                 <span className="relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#1b6b56] after:transition-all hover:after:w-full">
                   {item.label}
@@ -153,7 +154,7 @@ export default function Navbar() {
                     key={item.label}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 rounded-lg text-[#111] hover:bg-black/5 transition-colors"
+                    className="block px-3 py-3 rounded-lg text-[#111] hover:bg-black/5 transition-colors"
                   >
                     {item.label}
                   </a>

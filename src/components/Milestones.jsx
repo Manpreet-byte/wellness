@@ -33,7 +33,14 @@ export default function Milestones() {
   }, []);
 
   return (
-    <section id="milestones" className="bg-white py-20 md:py-28 overflow-hidden">
+    <section id="milestones" className="py-20 md:py-28 bg-[#d9efe3] overflow-hidden relative">
+      <div className="section-animated-bg">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+          <circle className="blob-light-1" cx="100" cy="200" r="150" />
+          <circle className="blob-light-2" cx="900" cy="300" r="130" />
+          <circle className="blob-light-3" cx="500" cy="500" r="180" />
+        </svg>
+      </div>
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-14">
           <div className="max-w-2xl">
@@ -72,26 +79,27 @@ export default function Milestones() {
               return (
                 <div
                   key={`${milestone.year}-${idx}`}
+                  className={`milestone-item relative flex-shrink-0 w-[340px] sm:w-[360px] md:w-[380px] ${isActive ? 'active' : ''}`}
                   data-ms-item
                   data-ms-item-index={idx}
-                  className={`relative flex-shrink-0 w-[340px] sm:w-[360px] md:w-[380px] border-l border-[#1b6b56]/15 ${idx === milestones.length - 1 ? 'border-r border-[#1b6b56]/15' : ''}`}
                 >
+                  <div className="milestone-line" />
                   <button
                     type="button"
                     onClick={() => setActiveIndex(idx)}
                     className="w-full text-left px-7 sm:px-8 pt-10 pb-6"
                   >
-                    <div className={`text-6xl md:text-[5rem] font-light leading-none ${isActive ? 'text-[#1b6b56]' : 'text-[#1b6b56]/30'}`}>
+                    <div className={`milestone-year-text ${isActive ? 'text-[var(--wf-green-dark)]' : 'text-[var(--wf-green-dark)]/30'}`}>
                       {milestone.year}
                     </div>
-                    <div className={`mt-4 text-lg md:text-xl font-semibold ${isActive ? 'text-[#111]' : 'wf-text-secondary'}`}>
+                    <div className={`milestone-title-text ${isActive ? 'text-[var(--wf-green-dark)]' : 'wf-text-secondary'}`}>
                       {milestone.title}
                     </div>
                   </button>
 
                   <div className="h-16 md:h-20 border-y border-[#1b6b56]/12 bg-[repeating-linear-gradient(90deg,rgba(27,107,86,0.08)_0_2px,transparent_2px_16px)]" />
 
-                  <div className="px-7 sm:px-8 pb-14">
+                  <div className="px-7 sm:px-8 pb-2 md:pb-0">
                     <div className={`transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'}`}>
                       <div className="pt-10">
                         <div className="overflow-hidden rounded-none">
@@ -108,7 +116,7 @@ export default function Milestones() {
                         </p>
                       </div>
                     </div>
-                    {!isActive ? <div className="h-[250px] md:h-[265px]" /> : null}
+                    {!isActive ? <div className="h-[150px] md:h-[170px]" /> : null}
                   </div>
                 </div>
               );

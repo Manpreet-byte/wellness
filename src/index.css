@@ -75,7 +75,7 @@
 
   /* Bootstrap-like display sizing used by the demo */
   .wf-display-4 {
-    font-size: 3.5rem;
+    font-size: 3.9rem;
     line-height: 1;
   }
 
@@ -206,9 +206,7 @@
   }
 
   /* stats bar divider tweak */
-  .stats-divider > * + * {
-    border-left: 1px solid rgba(255,255,255,0.12);
-  }
+ 
 
   .stat-divider-item {
     position: relative;
@@ -220,9 +218,9 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    height: 60px;
+    height: 44px;
     width: 1px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.28);
   }
 
   .stats-bg {
@@ -259,8 +257,177 @@
   .blob-light-1 { animation: rotate1 6s infinite linear; fill: rgba(255, 255, 255, 0.95); transform-origin: 100px 200px; }
   .blob-light-2 { animation: rotate2 8s infinite linear; fill: rgba(255, 255, 255, 0.9); transform-origin: 900px 300px; }
   .blob-light-3 { animation: rotate1 10s infinite linear reverse; fill: rgba(255, 255, 255, 0.95); transform-origin: 500px 500px; }
+
+  .divider-line {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(26, 107, 74, 0.2), transparent);
+  }
+
+  .vision-card,
+  .mission-card {
+    padding: 60px 40px;
+    border-radius: 24px;
+    height: 100%;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .vision-card {
+    background-color: #0d2a23;
+    color: white;
+  }
+  .vision-card h3 { color: white; }
+  .vision-card p { color: rgba(255, 255, 255, 0.8); }
+  .vision-card .icon-square-white {
+    background-color: #ffffff;
+    transition: background-color 0.5s ease;
+  }
+  .vision-card .icon-square-white img {
+    filter: none;
+    transition: filter 0.5s ease;
+  }
+
+  .mission-card {
+    background-color: #ffffff;
+    color: var(--wf-text-dark);
+    box-shadow: 0 10px 40px rgba(26, 107, 74, 0.05);
+    border: 1px solid rgba(26, 107, 74, 0.05);
+  }
+  .mission-card h3 { color: var(--wf-text-dark); }
+  .mission-card p { color: var(--wf-text-gray); }
+  .mission-card .icon-square-green {
+    background-color: #0d2a23;
+    transition: background-color 0.5s ease;
+  }
+  .mission-card .icon-square-green img {
+    filter: brightness(0) invert(1);
+    transition: filter 0.5s ease;
+  }
+
+  /* Hover behavior to match the demo */
+  .mission-vision-section:has(.mission-card:hover) .vision-card {
+    background-color: #ffffff;
+    color: var(--wf-text-dark);
+    box-shadow: 0 10px 40px rgba(26, 107, 74, 0.05);
+    border: 1px solid rgba(26, 107, 74, 0.05);
+  }
+  .mission-vision-section:has(.mission-card:hover) .vision-card h3 { color: var(--wf-text-dark); }
+  .mission-vision-section:has(.mission-card:hover) .vision-card p { color: var(--wf-text-gray); }
+  .mission-vision-section:has(.mission-card:hover) .vision-card .icon-square-white { background-color: #0d2a23; }
+  .mission-vision-section:has(.mission-card:hover) .vision-card .icon-square-white img { filter: brightness(0) invert(1); }
+
+  .mission-card:hover {
+    background-color: #0d2a23;
+    color: white;
+    box-shadow: 0 20px 50px rgba(13, 42, 35, 0.2);
+  }
+  .mission-card:hover h3 { color: white; }
+  .mission-card:hover p { color: rgba(255, 255, 255, 0.8); }
+  .mission-card:hover .icon-square-green { background-color: #ffffff; }
+  .mission-card:hover .icon-square-green img { filter: none; }
+
+  .card-scroll-box {
+    max-height: 100px;
+    overflow-y: auto;
+    padding-right: 15px;
+  }
+
+  .card-scroll-box::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .card-scroll-box::-webkit-scrollbar-track {
+    background: #cdc;
+    border-radius: 10px;
+  }
+
+  .card-scroll-box::-webkit-scrollbar-thumb {
+    background: var(--wf-green-dark);
+    border-radius: 10px;
+  }
+
+  .icon-square-white,
+  .icon-square-green {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-square-white img,
+  .icon-square-green img {
+    width: 25px;
+  }
+
+  @media (max-width: 991px) {
+    .vision-card,
+    .mission-card {
+      padding: 40px 25px;
+    }
+  }
 }
 
+.section-animated-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(closest-side at 55% 35%, rgba(255,255,255,0.85), rgba(255,255,255,0.18) 20%, transparent 45%);
+  mix-blend-mode: screen;
+}
+
+/* Awards tweaks */
+.awards-card {
+  transition: transform 220ms cubic-bezier(.16,1,.3,1), box-shadow 220ms ease;
+}
+.awards-card:hover {
+  transform: translateY(-6px);
+}
+
+.awards-timeline { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+/* Milestone year text styling (per user request) */
+.milestone-year-text {
+  font-size: 4rem;
+  font-weight: 500;
+  color: rgba(26, 107, 74, 0.4);
+  line-height: 1;
+  margin-bottom: 10px;
+  transition: all 0.5s ease;
+}
+
+.milestone-line {
+  width: 4px;
+  height: 500px;
+  background: rgba(26, 107, 74, 0.3);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.milestone-item.active .milestone-line {
+  background: var(--wf-green-dark);
+}
+
+.milestone-title-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--wf-text-gray);
+  transition: all 0.5s ease;
+}
+
+.milestone-item.active .milestone-year-text,
+.milestone-item:hover .milestone-year-text,
+.milestone-item.active .milestone-title-text,
+.milestone-item:hover .milestone-title-text {
+  color: var(--wf-green-dark);
+}
 /* Animation utilities */
 @keyframes rotate1 {
   from { transform: rotate(0deg); }

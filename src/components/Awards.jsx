@@ -16,7 +16,8 @@ export default function Awards() {
     const child = el.children?.[index];
     if (!child) return;
     // Only scroll inside the horizontal scroller (avoid page scroll).
-    el.scrollTo({ left: child.offsetLeft, behavior });
+    const cardGap = 20;
+    el.scrollTo({ left: Math.max(0, child.offsetLeft - cardGap), behavior });
   };
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Awards() {
         const firstChild = el.firstElementChild;
         if (!firstChild) return;
         const cardWidth = firstChild.getBoundingClientRect().width;
-        const gap = 28; // matches `gap-7`
+        const gap = 20; // matches the desktop gap
         const index = Math.round(el.scrollLeft / Math.max(1, cardWidth + gap));
         setActiveIndex(Math.max(0, Math.min(awards.length - 1, index)));
       });
@@ -104,12 +105,12 @@ export default function Awards() {
   };
 
   return (
-    <section id="awards" className="py-20 md:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
+    <section id="awards" className="py-20 md:py-28 bg-[#f3fbf7]">
+      <div className="max-w-[1280px] mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-14 animate-this up">
           <div className="max-w-2xl">
             <p className="animate-this right text-xs md:text-sm font-semibold tracking-[0.35em] text-[#1b6b56] uppercase">Recognition</p>
-            <h2 className="animate-this left mt-3 text-4xl sm:text-5xl md:text-6xl lg:text-[4.9rem] font-light text-[#111] leading-[0.95]" data-reveal-delay="120">
+            <h2 className="animate-this left mt-3 wf-display-4 wf-fw-normal text-[#111]" data-reveal-delay="120">
               Awards & Accolades
             </h2>
           </div>
@@ -140,15 +141,15 @@ export default function Awards() {
 
         <div className="relative animate-this up">
           {/* timeline */}
-          <div className="relative mt-4 mb-10 animate-this up" data-reveal-delay="140">
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-[#1b6b56]/20" />
+          <div className="relative mt-4 mb-10 animate-this up px-2 sm:px-4 md:px-6 awards-timeline" data-reveal-delay="140">
+            <div className="absolute left-2 right-2 sm:left-4 sm:right-4 md:left-6 md:right-6 top-1/2 -translate-y-1/2 h-[1px] bg-[var(--wf-green-dark)]/10" />
             <div className="relative flex items-center justify-between">
               {markers.map((id, idx) => {
                 const isActive = idx === activeIndex;
                 return (
                   <div key={id} className="relative z-10 flex items-center justify-center">
-                    <div className={`w-3 h-3 rounded-full ${isActive ? 'bg-[#1b6b56]' : 'bg-[#1b6b56]/30'}`} />
-                    {isActive && <div className="absolute w-10 h-10 rounded-full bg-[#1b6b56]/12" />}
+                    <div className={`w-3 h-3 rounded-full ${isActive ? 'bg-[var(--wf-green-dark)]' : 'bg-[var(--wf-green-dark)]/30'}`} />
+                    {isActive && <div className="absolute w-14 h-14 rounded-full bg-[var(--wf-green-dark)]/12" />}
                   </div>
                 );
               })}
@@ -156,12 +157,9 @@ export default function Awards() {
           </div>
 
           {/* cards */}
-          <div
-            ref={scrollerRef}
-            className="flex gap-7 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-2"
-          >
+          <div ref={scrollerRef} className="flex gap-5 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-2">
             {awards.map((award, idx) => (
-              <div key={award.id} className="snap-start flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px] lg:w-[360px]">
+              <div key={award.id} className="snap-start flex-shrink-0 w-[250px] sm:w-[270px] md:w-[285px] lg:w-[295px]">
                 <div
                   data-award-card
                   className="relative group animate-this up animate-pop"
@@ -176,22 +174,11 @@ export default function Awards() {
                     }
                   }}
                 >
-                  <div className="bg-white border border-black/5 px-8 py-10 min-h-[180px] flex flex-col justify-center hover-lift cursor-pointer">
-                    <h3 className="text-lg md:text-xl font-semibold text-[#111]">{award.title}</h3>
-                    <p className="mt-3 text-sm md:text-base text-[#6b7a75] leading-7">{award.subtitle}</p>
+                  <div className="bg-white rounded-2xl shadow-md border border-black/6 px-7 py-10 min-h-[220px] flex flex-col justify-center hover-lift cursor-pointer awards-card">
+                    <h3 className="text-sm md:text-base font-semibold text-[#111] uppercase tracking-wide">{award.title}</h3>
+                    <p className="mt-4 text-sm md:text-base text-[#6b7a75] leading-7">{award.subtitle}</p>
                   </div>
 
-                  {award.image ? (
-                    <div
-                      className={`pointer-events-none absolute -top-44 left-1/2 -translate-x-1/2 transition-all duration-200 ${
-                        openAwardId === award.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-                      } group-hover:opacity-100 group-hover:translate-y-0`}
-                    >
-                      <div className="bg-white shadow-lg border border-black/10 p-2">
-                        <img src={award.image} alt={`${award.title} award`} className="w-[240px] h-[140px] object-cover" />
-                      </div>
-                    </div>
-                  ) : null}
                 </div>
               </div>
             ))}
