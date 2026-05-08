@@ -48,6 +48,14 @@
     color: var(--wf-text-gray);
   }
 
+  .text-secondary {
+    color: var(--wf-text-gray) !important;
+  }
+
+  .small {
+    font-size: 0.875rem;
+  }
+
   .wf-fw-normal {
     font-weight: 400;
   }
@@ -75,7 +83,7 @@
 
   /* Bootstrap-like display sizing used by the demo */
   .wf-display-4 {
-    font-size: 3.9rem;
+    font-size: 3.5rem;
     line-height: 1;
   }
 
@@ -381,15 +389,186 @@
   mix-blend-mode: screen;
 }
 
-/* Awards tweaks */
-.awards-card {
-  transition: transform 220ms cubic-bezier(.16,1,.3,1), box-shadow 220ms ease;
-}
-.awards-card:hover {
-  transform: translateY(-6px);
+/* Awards (match demo pixel-perfect) */
+.awards-section {
+  background-color: #EDF7F380;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  overflow: visible;
 }
 
-.awards-timeline { padding-left: 1.5rem; padding-right: 1.5rem; }
+.awards-heading {
+  color: var(--wf-text-dark);
+}
+
+.awards-carousel {
+  position: relative;
+  padding-top: 80px;
+  overflow: visible;
+}
+
+.awards-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  z-index: 1;
+}
+
+.awards-dots::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(26, 107, 74, 0.2);
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.awards-dot {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.awards-dot span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: rgba(26, 107, 74, 0.3);
+  border: 4px solid #f8fbf9;
+  border-radius: 999px;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.awards-dot.active span {
+  background: var(--wf-green-dark);
+  transform: scale(1.5);
+  box-shadow: 0 0 0 3px rgba(26, 107, 74, 0.1);
+}
+
+.awards-stage-outer {
+  padding-top: 250px;
+  margin-top: -250px;
+  position: relative;
+  z-index: 10;
+  overflow: visible;
+  overflow-x: auto;
+  overflow-y: visible;
+  pointer-events: auto;
+  scrollbar-width: none;
+}
+
+.awards-stage-outer::-webkit-scrollbar {
+  display: none;
+}
+
+.awards-stage {
+  display: flex;
+  gap: 24px;
+  overflow: visible;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+  pointer-events: auto;
+}
+
+.awards-stage {
+  /* keep the stage from shrinking so the outer scroll works */
+  width: max-content;
+  min-width: 100%;
+}
+
+.award-card-item {
+  padding: 20px 0;
+  position: relative;
+  flex: 0 0 auto;
+  width: 280px;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .award-card-item { width: 300px; }
+}
+
+@media (min-width: 768px) {
+  .award-card-item { width: 320px; }
+}
+
+.award-card {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(26, 107, 74, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.award-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(26, 107, 74, 0.1);
+  border-color: var(--wf-green-dark);
+}
+
+.award-card-item:hover {
+  z-index: 5000;
+}
+
+.award-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 220px;
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 9999;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.award-tooltip img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.award-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid transparent;
+  border-top-color: white;
+}
+
+.award-card-item:hover .award-tooltip,
+.award-tooltip--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.award-card h4 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
 
 /* Milestone year text styling (per user request) */
 .milestone-year-text {
