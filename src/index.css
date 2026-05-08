@@ -37,11 +37,11 @@
   }
 
   .btn-primary {
-    @apply px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition-colors duration-300;
+    @apply px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition-colors duration-300;
   }
   
   .btn-secondary {
-    @apply px-6 py-3 bg-white text-primary border-2 border-primary rounded-lg font-semibold hover:bg-accent transition-colors duration-300;
+    @apply px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base bg-white text-primary border-2 border-primary rounded-lg font-semibold hover:bg-accent transition-colors duration-300;
   }
 
   .wf-text-secondary {
@@ -54,6 +54,16 @@
 
   .small {
     font-size: 0.875rem;
+  }
+
+  .fs-6 {
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 640px) {
+    .fs-6 {
+      font-size: 1rem;
+    }
   }
 
   .wf-fw-normal {
@@ -87,15 +97,27 @@
     line-height: 1;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 1024px) {
     .wf-display-4 {
       font-size: 3rem;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     .wf-display-4 {
       font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .wf-display-4 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .wf-display-4 {
+      font-size: 1.75rem;
     }
   }
 
@@ -143,11 +165,11 @@
   }
   
   .section-title {
-    @apply text-4xl font-bold text-dark mb-2;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-2;
   }
   
   .section-subtitle {
-    @apply text-lg text-gray-600 mb-12;
+    @apply text-base md:text-lg text-gray-600 mb-8 md:mb-12;
   }
 
   .hero-heading {
@@ -170,29 +192,52 @@
   }
 
   .hero-title {
-    font-size: 4.5rem;
+    font-size: 3rem;
     line-height: 1.1;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-weight: 700;
   }
 
-  @media (max-width: 991px) {
+  @media (min-width: 640px) {
     .hero-title {
       font-size: 3.5rem;
+      margin-bottom: 1.75rem;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (min-width: 1024px) {
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 4rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-title {
+      font-size: 4.5rem;
+      margin-bottom: 2rem;
     }
   }
 
   .hero-subtext {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     max-width: 600px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 640px) {
+    .hero-subtext {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-subtext {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
   }
 
   .btn-shop {
@@ -240,11 +285,29 @@
   }
 
   .hover-scale:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
+  }
+
+  @media (min-width: 768px) {
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
   }
 
   .about-img-box {
-    margin-top: -5rem;
+    margin-top: -3rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-img-box {
+      margin-top: -4rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-img-box {
+      margin-top: -5rem;
+    }
   }
 
   .section-animated-bg {
@@ -274,13 +337,29 @@
 
   .vision-card,
   .mission-card {
-    padding: 60px 40px;
-    border-radius: 24px;
+    padding: 40px 24px;
+    border-radius: 20px;
     height: 100%;
-    min-height: 250px;
+    min-height: 240px;
     display: flex;
     flex-direction: column;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (min-width: 640px) {
+    .vision-card,
+    .mission-card {
+      padding: 50px 32px;
+      border-radius: 22px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .vision-card,
+    .mission-card {
+      padding: 60px 40px;
+      border-radius: 24px;
+    }
   }
 
   .vision-card {
@@ -372,12 +451,7 @@
     width: 25px;
   }
 
-  @media (max-width: 991px) {
-    .vision-card,
-    .mission-card {
-      padding: 40px 25px;
-    }
-  }
+
 }
 
 .section-animated-bg::after {
@@ -392,9 +466,23 @@
 /* Awards (match demo pixel-perfect) */
 .awards-section {
   background-color: #EDF7F380;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 60px;
+  padding-bottom: 60px;
   overflow: visible;
+}
+
+@media (min-width: 640px) {
+  .awards-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .awards-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
 }
 
 .awards-heading {
@@ -403,8 +491,20 @@
 
 .awards-carousel {
   position: relative;
-  padding-top: 80px;
+  padding-top: 50px;
   overflow: visible;
+}
+
+@media (min-width: 640px) {
+  .awards-carousel {
+    padding-top: 60px;
+  }
+}
+
+@media (min-width: 768px) {
+  .awards-carousel {
+    padding-top: 80px;
+  }
 }
 
 .awards-dots {
@@ -414,8 +514,23 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
-  z-index: 1;
+  padding: 12px 0;
+  z-index: 20;
+  gap: 4px;
+}
+
+@media (min-width: 640px) {
+  .awards-dots {
+    padding: 16px 0;
+    gap: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .awards-dots {
+    padding: 20px 0;
+    gap: 12px;
+  }
 }
 
 .awards-dots::before {
@@ -441,13 +556,29 @@
 
 .awards-dot span {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: rgba(26, 107, 74, 0.3);
-  border: 4px solid #f8fbf9;
+  border: 3px solid #f8fbf9;
   border-radius: 999px;
   margin: 0;
   transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .awards-dot span {
+    width: 18px;
+    height: 18px;
+    border: 3.5px solid #f8fbf9;
+  }
+}
+
+@media (min-width: 768px) {
+  .awards-dot span {
+    width: 20px;
+    height: 20px;
+    border: 4px solid #f8fbf9;
+  }
 }
 
 .awards-dot.active span {
@@ -457,10 +588,10 @@
 }
 
 .awards-stage-outer {
-  padding-top: 250px;
-  margin-top: -250px;
+  padding-top: 0;
+  margin-top: 0;
   position: relative;
-  z-index: 10;
+  z-index: 5;
   overflow: visible;
   overflow-x: auto;
   overflow-y: visible;
@@ -488,30 +619,64 @@
 }
 
 .award-card-item {
-  padding: 20px 0;
+  padding: 16px 0;
   position: relative;
   flex: 0 0 auto;
-  width: 280px;
+  width: 270px;
   z-index: 1;
 }
 
+@media (min-width: 480px) {
+  .award-card-item {
+    width: 280px;
+    padding: 18px 0;
+  }
+}
+
 @media (min-width: 640px) {
-  .award-card-item { width: 300px; }
+  .award-card-item { 
+    width: 300px;
+    padding: 20px 0;
+  }
 }
 
 @media (min-width: 768px) {
-  .award-card-item { width: 320px; }
+  .award-card-item { 
+    width: 320px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .award-card-item { 
+    width: 340px;
+  }
 }
 
 .award-card {
   background: white;
-  padding: 30px 25px;
-  border-radius: 12px;
+  padding: 24px 18px;
+  border-radius: 14px;
   width: 100%;
+  min-height: 160px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid rgba(26, 107, 74, 0.05);
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media (min-width: 640px) {
+  .award-card {
+    padding: 28px 22px;
+    border-radius: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .award-card {
+    padding: 30px 25px;
+    border-radius: 16px;
+  }
 }
 
 .award-card:hover {
@@ -565,24 +730,82 @@
   transform: translateX(-50%) translateY(-5px);
 }
 
+/* Portal tooltip: ensures preview is never hidden by dots/header layers */
+.award-tooltip-portal {
+  position: fixed;
+  transform: translate(-50%, calc(-100% - 14px));
+  width: 220px;
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.award-tooltip-portal img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+.award-tooltip-portal::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid transparent;
+  border-top-color: white;
+}
+
+.award-tooltip-portal.award-tooltip--open {
+  opacity: 1;
+  visibility: visible;
+}
+
 .award-card h4 {
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   color: #1a1a1a;
+  line-height: 1.25;
 }
 
 /* Milestone year text styling (per user request) */
 .milestone-year-text {
-  font-size: 4rem;
+  font-size: 2.5rem;
   font-weight: 500;
   color: rgba(26, 107, 74, 0.4);
   line-height: 1;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   transition: all 0.5s ease;
 }
 
+@media (min-width: 640px) {
+  .milestone-year-text {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .milestone-year-text {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .milestone-year-text {
+    font-size: 4rem;
+  }
+}
+
 .milestone-line {
-  width: 4px;
-  height: 500px;
+  width: 3px;
+  height: 400px;
   background: rgba(26, 107, 74, 0.3);
   position: absolute;
   left: 0;
@@ -590,15 +813,41 @@
   z-index: 2;
 }
 
+@media (min-width: 768px) {
+  .milestone-line {
+    width: 3.5px;
+    height: 450px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .milestone-line {
+    width: 4px;
+    height: 500px;
+  }
+}
+
 .milestone-item.active .milestone-line {
   background: var(--wf-green-dark);
 }
 
 .milestone-title-text {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--wf-text-gray);
   transition: all 0.5s ease;
+}
+
+@media (min-width: 768px) {
+  .milestone-title-text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .milestone-title-text {
+    font-size: 1.2rem;
+  }
 }
 
 .milestone-item.active .milestone-year-text,

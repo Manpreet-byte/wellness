@@ -1,16 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { awards } from '../data/company';
 
 export default function Awards() {
   const scrollerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [openAwardId, setOpenAwardId] = useState(null);
+  const [preview, setPreview] = useState(null);
   const inViewRef = useRef(false);
   const autoplayRef = useRef(null);
   const animRef = useRef(0);
   const baseIndexRef = useRef(awards.length); // start in the middle copy for seamless loop
 
   const total = awards.length;
+  const canHoverRef = useRef(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia?.('(hover: hover) and (pointer: fine)');
+    if (!mq) return;
+    const apply = () => {
+      canHoverRef.current = !!mq.matches;
+    };
+    apply();
+    mq.addEventListener?.('change', apply);
+    return () => mq.removeEventListener?.('change', apply);
+  }, []);
 
   const getStage = () => scrollerRef.current?.querySelector?.('.awards-stage') ?? null;
 
@@ -23,11 +37,11 @@ export default function Awards() {
     cancelAnim();
     const from = el.scrollLeft;
     const start = performance.now();
-    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
     const tick = (now) => {
       const t = Math.min(1, (now - start) / duration);
-      el.scrollLeft = from + (to - from) * easeOutCubic(t);
+      el.scrollLeft = from + (to - from) * easeInOutCubic(t);
       if (t < 1) animRef.current = requestAnimationFrame(tick);
       else animRef.current = 0;
     };
@@ -47,7 +61,24 @@ export default function Awards() {
       el.scrollLeft = left;
       return;
     }
-    animateScrollLeft(el, left);
+    animateScrollLeft(el, left, 1000);
+  };
+
+  const showPreviewForCard = (cardEl, award) => {
+    if (!award?.image || !cardEl) return;
+    const rect = cardEl.getBoundingClientRect();
+    setPreview({
+      id: award.id,
+      src: award.image,
+      alt: `${award.title} award`,
+      left: rect.left + rect.width / 2,
+      top: rect.top,
+    });
+  };
+
+  const closePreview = () => {
+    setOpenAwardId(null);
+    setPreview(null);
   };
 
   useEffect(() => {
@@ -63,12 +94,18 @@ export default function Awards() {
         const children = Array.from(stage.children);
         if (!children.length) return;
 
-        const first = children[0];
-        const itemWidth = first.getBoundingClientRect().width;
-        const stageStyle = window.getComputedStyle(stage);
-        const gap = Number.parseFloat(stageStyle.columnGap || stageStyle.gap || '0') || 24;
-        const raw = Math.round(el.scrollLeft / Math.max(1, itemWidth + gap));
-        const clamped = Math.max(0, Math.min(children.length - 1, raw));
+        // Awards carousel in the demo is left-aligned; pick the nearest card start.
+        const x = el.scrollLeft;
+        let best = 0;
+        let bestDist = Number.POSITIVE_INFINITY;
+        for (let i = 0; i < children.length; i += 1) {
+          const d = Math.abs(children[i].offsetLeft - x);
+          if (d < bestDist) {
+            bestDist = d;
+            best = i;
+          }
+        }
+        const clamped = Math.max(0, Math.min(children.length - 1, best));
 
         baseIndexRef.current = clamped;
         setActiveIndex(clamped % total);
@@ -134,7 +171,10 @@ export default function Awards() {
       stop();
       if (!inViewRef.current) return;
       autoplayRef.current = window.setInterval(() => {
-        scrollToVirtualIndex(baseIndexRef.current + 1, { animated: true });
+        const nextVirtual = baseIndexRef.current + 1;
+        baseIndexRef.current = nextVirtual;
+        setActiveIndex(nextVirtual % total);
+        scrollToVirtualIndex(nextVirtual, { animated: true });
       }, 2000);
     };
 
@@ -149,8 +189,43 @@ export default function Awards() {
     };
   }, [total]);
 
+  useEffect(() => {
+    // Close any opened tooltip when clicking outside (matches prior click-to-preview behavior).
+    const onPointerDown = (e) => {
+      const host = e.target?.closest?.('[data-award-item]');
+      if (!host) closePreview();
+    };
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') closePreview();
+    };
+    document.addEventListener('pointerdown', onPointerDown, true);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown, true);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
+
   const scrollByCards = (direction) => {
-    scrollToVirtualIndex(baseIndexRef.current + (direction > 0 ? 1 : -1), { animated: true });
+    const nextVirtual = baseIndexRef.current + (direction > 0 ? 1 : -1);
+    baseIndexRef.current = nextVirtual;
+    setActiveIndex(nextVirtual % total);
+    scrollToVirtualIndex(nextVirtual, { animated: true });
+
+    // Match demo: restart autoplay after manual nav.
+    const el = scrollerRef.current;
+    if (!el) return;
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+    if (!inViewRef.current) return;
+    autoplayRef.current = window.setInterval(() => {
+      const n = baseIndexRef.current + 1;
+      baseIndexRef.current = n;
+      setActiveIndex(n % total);
+      scrollToVirtualIndex(n, { animated: true });
+    }, 2000);
   };
 
   return (
@@ -183,7 +258,13 @@ export default function Awards() {
                 key={award.id}
                 type="button"
                 className={`awards-dot ${idx === activeIndex ? 'active' : ''}`}
-                onClick={() => scrollToVirtualIndex(total + idx, { animated: true })}
+                onClick={() => {
+                  const nextVirtual = total + idx;
+                  baseIndexRef.current = nextVirtual;
+                  setActiveIndex(idx);
+                  closePreview();
+                  scrollToVirtualIndex(nextVirtual, { animated: true });
+                }}
                 aria-label={`Go to ${award.title}`}
                 aria-selected={idx === activeIndex}
                 role="tab"
@@ -196,35 +277,57 @@ export default function Awards() {
           <div ref={scrollerRef} className="awards-stage-outer" aria-label="Awards list">
             <div className="awards-stage">
               {[...awards, ...awards, ...awards].map((award, virtualIndex) => {
-                const tooltipOpen = openAwardId === award.id;
                 const index = virtualIndex % total;
                 return (
-                  <div key={`${award.id}-${virtualIndex}`} className="award-card-item animate-this up" data-reveal-delay={240 + index * 90}>
-                    <div
-                      className="award-card shadow-sm"
-                      role="button"
-                      tabIndex={0}
-                      onMouseEnter={() => setOpenAwardId(null)}
-                      onClick={() => setOpenAwardId((prev) => (prev === award.id ? null : award.id))}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setOpenAwardId((prev) => (prev === award.id ? null : award.id));
+                  <div
+                    key={`${award.id}-${virtualIndex}`}
+                    data-award-item
+                    className="award-card-item animate-this up"
+                    data-reveal-delay={240 + index * 90}
+                  >
+	                    <div
+	                      className="award-card shadow-sm"
+	                      role="button"
+	                      tabIndex={0}
+                      onMouseEnter={(e) => {
+                        if (canHoverRef.current) {
+                          setOpenAwardId(award.id);
+                          showPreviewForCard(e.currentTarget, award);
                         }
                       }}
-                    >
+	                      onMouseLeave={() => {
+	                        if (canHoverRef.current) closePreview();
+	                      }}
+	                      onClick={(e) => {
+	                        const next = openAwardId === award.id ? null : award.id;
+	                        if (!next) {
+	                          closePreview();
+	                          return;
+	                        }
+	                        setOpenAwardId(next);
+	                        showPreviewForCard(e.currentTarget, award);
+	                      }}
+	                      onKeyDown={(e) => {
+	                        if (e.key === 'Enter' || e.key === ' ') {
+	                          e.preventDefault();
+	                          const next = openAwardId === award.id ? null : award.id;
+	                          if (!next) {
+	                            closePreview();
+	                            return;
+	                          }
+	                          setOpenAwardId(next);
+	                          showPreviewForCard(e.currentTarget, award);
+	                        }
+	                      }}
+	                    >
                       <h4 className="fw-bold fs-6">{award.title}</h4>
                       <p className="small mb-0 text-secondary">{award.subtitle}</p>
                     </div>
 
-                    {award.image ? (
-                      <div className={`award-tooltip ${tooltipOpen ? 'award-tooltip--open' : ''}`}>
-                        <img src={award.image} alt="Award Image" />
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              })}
+	                    {/* tooltip rendered via portal for correct stacking */}
+	                  </div>
+	                );
+	              })}
             </div>
           </div>
 
@@ -238,6 +341,19 @@ export default function Awards() {
           </div>
         </div>
       </div>
+
+      {preview
+        ? createPortal(
+            <div
+              className={`award-tooltip-portal ${openAwardId === preview.id ? 'award-tooltip--open' : ''}`}
+              style={{ left: `${preview.left}px`, top: `${preview.top}px` }}
+              aria-hidden={openAwardId !== preview.id}
+            >
+              <img src={preview.src} alt={preview.alt} />
+            </div>,
+            document.body,
+          )
+        : null}
     </section>
   );
 }
