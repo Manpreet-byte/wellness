@@ -25,17 +25,17 @@ export default function About() {
           <div className="relative z-10 h-full">
             <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16 h-full flex items-start pt-16 sm:pt-20 pb-16 md:pt-28 lg:pt-32 md:pb-0">
               <div className="max-w-[640px]">
-                <h2 className="animate-this right text-5xl md:text-6xl lg:text-7xl font-light text-[#111] mb-8">
+                <h2 className="animate-this right wf-display-4 wf-fw-normal text-[#111] mb-8">
                   About Us
                 </h2>
 
-                <p className="animate-this left text-sm md:text-base text-[#5e6b66] leading-relaxed mb-8 max-w-[560px]" data-reveal-delay="120">
+                <p className="animate-this left text-sm md:text-base wf-text-secondary leading-relaxed mb-8 max-w-[560px]" data-reveal-delay="120">
                   Wellness Forever is one of India’s leading pharmacy retail chains, committed to making healthcare accessible, reliable, and convenient for every customer.
                   <br />
                   Headquartered in Mumbai, Wellness Forever was founded in 2008 by three well-known entrepreneurs; Mr. Ashraf Biran, Mr. Gulshan Bakhtiani and Mr. Mohan Chavan.
                 </p>
 
-                <p className="animate-this left text-sm md:text-base text-[#5e6b66] leading-relaxed mb-12 max-w-[560px]" data-reveal-delay="220">
+                <p className="animate-this left text-sm md:text-base wf-text-secondary leading-relaxed mb-12 max-w-[560px]" data-reveal-delay="220">
                   With a strong presence across Maharashtra, Goa, and Karnataka, we have built a network of 475+ stores that serve communities with consistency and care.
                   <br />
                   At the heart of our operations is a team of over 1,400 qualified pharmacists and 5,000+ total employees, dedicated to delivering expert guidance and a seamless customer experience. Serving more than 4 crore orders annually, we ensure the availability of genuine medicines and healthcare essentials day and night, across the majority of our stores.

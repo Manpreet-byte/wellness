@@ -104,12 +104,12 @@ export default function Awards() {
   };
 
   return (
-    <section id="awards" className="py-20 md:py-28 bg-[#f3fbf7]">
+    <section id="awards" className="py-20 md:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
-        <div className="flex items-end justify-between gap-6 mb-10 animate-this up">
-          <div>
-            <p className="animate-this right text-[#1b6b56] font-semibold tracking-widest text-sm">RECOGNITION</p>
-            <h2 className="animate-this left mt-3 text-5xl md:text-6xl lg:text-7xl font-light text-[#111]" data-reveal-delay="120">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-14 animate-this up">
+          <div className="max-w-2xl">
+            <p className="animate-this right text-xs md:text-sm font-semibold tracking-[0.35em] text-[#1b6b56] uppercase">Recognition</p>
+            <h2 className="animate-this left mt-3 text-4xl sm:text-5xl md:text-6xl lg:text-[4.9rem] font-light text-[#111] leading-[0.95]" data-reveal-delay="120">
               Awards & Accolades
             </h2>
           </div>
@@ -141,14 +141,14 @@ export default function Awards() {
         <div className="relative animate-this up">
           {/* timeline */}
           <div className="relative mt-4 mb-10 animate-this up" data-reveal-delay="140">
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#1b6b56]/30" />
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[1px] bg-[#1b6b56]/20" />
             <div className="relative flex items-center justify-between">
               {markers.map((id, idx) => {
                 const isActive = idx === activeIndex;
                 return (
                   <div key={id} className="relative z-10 flex items-center justify-center">
                     <div className={`w-3 h-3 rounded-full ${isActive ? 'bg-[#1b6b56]' : 'bg-[#1b6b56]/30'}`} />
-                    {isActive && <div className="absolute w-10 h-10 rounded-full bg-[#1b6b56]/15" />}
+                    {isActive && <div className="absolute w-10 h-10 rounded-full bg-[#1b6b56]/12" />}
                   </div>
                 );
               })}
@@ -176,9 +176,9 @@ export default function Awards() {
                     }
                   }}
                 >
-                  <div className="bg-white rounded-2xl shadow-sm border border-black/5 px-8 py-10 min-h-[170px] flex flex-col justify-center hover-lift cursor-pointer">
-                    <h3 className="text-lg font-semibold text-[#111]">{award.title}</h3>
-                    <p className="mt-3 text-sm text-[#6b7a75] leading-relaxed">{award.subtitle}</p>
+                  <div className="bg-white border border-black/5 px-8 py-10 min-h-[180px] flex flex-col justify-center hover-lift cursor-pointer">
+                    <h3 className="text-lg md:text-xl font-semibold text-[#111]">{award.title}</h3>
+                    <p className="mt-3 text-sm md:text-base text-[#6b7a75] leading-7">{award.subtitle}</p>
                   </div>
 
                   {award.image ? (
@@ -187,8 +187,8 @@ export default function Awards() {
                         openAwardId === award.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                       } group-hover:opacity-100 group-hover:translate-y-0`}
                     >
-                      <div className="bg-white rounded-xl shadow-lg border border-black/10 p-2">
-                        <img src={award.image} alt={`${award.title} award`} className="w-[240px] h-[140px] object-cover rounded-lg" />
+                      <div className="bg-white shadow-lg border border-black/10 p-2">
+                        <img src={award.image} alt={`${award.title} award`} className="w-[240px] h-[140px] object-cover" />
                       </div>
                     </div>
                   ) : null}

@@ -3,12 +3,27 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --wf-green-dark: #1a6b4a;
+    --wf-green-stats: #16654b;
+    --wf-text-dark: #212529;
+    --wf-text-gray: #6c757d;
+  }
+
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    @apply font-sans text-gray-900 bg-white;
+    @apply font-sans bg-white antialiased;
+    font-family: 'Satoshi', Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+    color: var(--wf-text-dark);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    letter-spacing: normal;
   }
 }
 
@@ -27,6 +42,53 @@
   
   .btn-secondary {
     @apply px-6 py-3 bg-white text-primary border-2 border-primary rounded-lg font-semibold hover:bg-accent transition-colors duration-300;
+  }
+
+  .wf-text-secondary {
+    color: var(--wf-text-gray);
+  }
+
+  .wf-fw-normal {
+    font-weight: 400;
+  }
+
+  .wf-fw-medium {
+    font-weight: 500;
+  }
+
+  .wf-fw-semibold {
+    font-weight: 600;
+  }
+
+  .wf-fw-extrabold {
+    font-weight: 800;
+  }
+
+  /* Demo/Bootstrap-ish helpers used in some components */
+  .fw-normal {
+    font-weight: 400;
+  }
+
+  .fw-bold {
+    font-weight: 700;
+  }
+
+  /* Bootstrap-like display sizing used by the demo */
+  .wf-display-4 {
+    font-size: 3.5rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 991px) {
+    .wf-display-4 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .wf-display-4 {
+      font-size: 2.5rem;
+    }
   }
 
   .wf-btn {
@@ -126,8 +188,8 @@
   }
 
   .btn-shop {
-    border: 1.5px solid #1b6b56;
-    color: #1b6b56;
+    border: 1.5px solid var(--wf-green-dark);
+    color: var(--wf-green-dark);
     font-weight: 600;
     border-radius: 999px;
     padding: 8px 24px;
@@ -135,7 +197,7 @@
   }
 
   .btn-shop:hover {
-    background-color: #1b6b56;
+    background-color: var(--wf-green-dark);
     color: white;
   }
 
@@ -164,7 +226,7 @@
   }
 
   .stats-bg {
-    background-color: #19684f; /* darker green similar to demo */
+    background-color: var(--wf-green-stats);
   }
 
   .hover-scale {

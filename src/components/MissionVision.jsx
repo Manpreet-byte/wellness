@@ -23,9 +23,9 @@ export default function MissionVision() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
         <div className="text-center mb-12 md:mb-14">
-          <h2 className="text-5xl md:text-6xl font-light text-[#1e2b26] mb-0 animate-this up">Mission & Vision</h2>
+          <h2 className="wf-display-4 wf-fw-normal text-[#1e2b26] mb-0 animate-this up">Mission & Vision</h2>
           <div className="mx-auto my-6 h-px w-3/5 bg-gradient-to-r from-transparent via-[#1b6b56]/20 to-transparent animate-this up" />
-          <p className="text-base md:text-lg text-[#5e6b66] max-w-2xl mx-auto leading-relaxed animate-this up">
+          <p className="text-base md:text-lg wf-text-secondary max-w-2xl mx-auto leading-relaxed animate-this up">
             Redefining healthcare access through compassion, expertise, and modern retail excellence, ensuring trusted, reliable, and seamless care for every community
           </p>
         </div>

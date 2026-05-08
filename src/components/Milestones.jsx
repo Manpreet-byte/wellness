@@ -33,25 +33,17 @@ export default function Milestones() {
   }, []);
 
   return (
-    <section id="milestones" className="py-20 md:py-28 bg-[#d9efe3] overflow-hidden relative">
-      <div className="section-animated-bg">
-        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
-          <circle className="blob-light-1" cx="100" cy="200" r="150" />
-          <circle className="blob-light-2" cx="900" cy="300" r="130" />
-          <circle className="blob-light-3" cx="500" cy="500" r="180" />
-        </svg>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
-        <div className="flex items-end justify-between gap-6 mb-10 md:mb-14">
-          <div>
-            <p className="animate-this right text-[#1b6b56] font-semibold tracking-widest text-sm">OUR HISTORY</p>
-            <h2 className="animate-this left mt-3 text-5xl md:text-6xl lg:text-7xl font-light text-[#1e2b26]" data-reveal-delay="120">
+    <section id="milestones" className="bg-white py-20 md:py-28 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 md:mb-14">
+          <div className="max-w-2xl">
+            <p className="animate-this right text-xs md:text-sm font-semibold tracking-[0.35em] text-[#1b6b56] uppercase">Our History</p>
+            <h2 className="animate-this left mt-3 wf-display-4 wf-fw-normal text-[#111]" data-reveal-delay="120">
               Milestones
             </h2>
           </div>
 
-          <div className="flex items-center gap-5 animate-this up" data-reveal-delay="220">
+          <div className="flex items-center gap-5 animate-this up self-start sm:self-auto" data-reveal-delay="220">
             <button
               type="button"
               onClick={goPrev}
@@ -72,12 +64,9 @@ export default function Milestones() {
         </div>
       </div>
 
-      <div className="relative z-10 animate-this up" data-reveal-delay="120">
-        <div
-          ref={scrollerRef}
-          className="overflow-x-auto no-scrollbar scroll-smooth"
-        >
-          <div className="min-w-[980px] md:min-w-[1200px] flex">
+      <div className="animate-this up" data-reveal-delay="120">
+        <div ref={scrollerRef} className="overflow-x-auto no-scrollbar scroll-smooth">
+          <div className="min-w-[1180px] md:min-w-[1420px] flex">
             {milestones.map((milestone, idx) => {
               const isActive = idx === activeIndex;
               return (
@@ -85,58 +74,41 @@ export default function Milestones() {
                   key={`${milestone.year}-${idx}`}
                   data-ms-item
                   data-ms-item-index={idx}
-                  className={`relative flex-shrink-0 w-[320px] sm:w-[340px] md:w-[360px] border-l border-[#a6c7bb] ${
-                    idx === milestones.length - 1 ? 'border-r border-[#a6c7bb]' : ''
-                  }`}
+                  className={`relative flex-shrink-0 w-[340px] sm:w-[360px] md:w-[380px] border-l border-[#1b6b56]/15 ${idx === milestones.length - 1 ? 'border-r border-[#1b6b56]/15' : ''}`}
                 >
-                  {/* active vertical line */}
-                  {isActive ? <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#1b6b56]" /> : null}
-
                   <button
                     type="button"
                     onClick={() => setActiveIndex(idx)}
                     className="w-full text-left px-7 sm:px-8 pt-10 pb-6"
                   >
-                    <div className={`text-6xl md:text-7xl font-light leading-none ${isActive ? 'text-[#1b6b56]' : 'text-[#1b6b56]/35'}`}>
+                    <div className={`text-6xl md:text-[5rem] font-light leading-none ${isActive ? 'text-[#1b6b56]' : 'text-[#1b6b56]/30'}`}>
                       {milestone.year}
                     </div>
-                    <div className={`mt-4 text-lg font-semibold ${isActive ? 'text-[#1b6b56]' : 'text-[#6b7a75]'}`}>
+                    <div className={`mt-4 text-lg md:text-xl font-semibold ${isActive ? 'text-[#111]' : 'wf-text-secondary'}`}>
                       {milestone.title}
                     </div>
                   </button>
 
-                  {/* stripes area */}
-                  <div
-                    className="h-24"
-                    style={{
-                      backgroundImage:
-                        'repeating-linear-gradient(90deg, rgba(27, 107, 86, 0.25) 0 2px, transparent 2px 14px)',
-                    }}
-                  />
+                  <div className="h-16 md:h-20 border-y border-[#1b6b56]/12 bg-[repeating-linear-gradient(90deg,rgba(27,107,86,0.08)_0_2px,transparent_2px_16px)]" />
 
-                  {/* details */}
                   <div className="px-7 sm:px-8 pb-14">
-                    <div
-                      className={`transition-all duration-500 ${
-                        isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none h-0 overflow-hidden'
-                      }`}
-                    >
+                    <div className={`transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'}`}>
                       <div className="pt-10">
-                        <div className="bg-white/30 rounded-xl p-0.5 inline-block">
+                        <div className="overflow-hidden rounded-none">
                           <img
                             src={milestone.image}
                             alt={milestone.title}
-                            className="w-full max-w-[280px] h-[150px] object-cover rounded-lg shadow-sm animate-mask"
+                            className="w-full h-[170px] md:h-[185px] object-cover animate-mask"
                             loading="lazy"
                             decoding="async"
                           />
                         </div>
-                        <p className="mt-5 text-sm leading-relaxed text-[#5e6b66] max-w-[340px]">
+                        <p className="mt-5 text-sm md:text-base leading-7 wf-text-secondary max-w-[300px]">
                           {milestone.description}
                         </p>
                       </div>
                     </div>
-                    {!isActive ? <div className="h-[220px]" /> : null}
+                    {!isActive ? <div className="h-[250px] md:h-[265px]" /> : null}
                   </div>
                 </div>
               );
